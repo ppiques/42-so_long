@@ -6,7 +6,7 @@
 #    By: ppiques <ppiques@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/16 17:19:46 by ppiques           #+#    #+#              #
-#    Updated: 2021/09/16 17:29:07 by ppiques          ###   ########.fr        #
+#    Updated: 2021/09/20 16:25:17 by ppiques          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS 	= $(SRCS:.c=.o)
 
 CC 		= gcc
 
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra
 
 RM		= rm -f
 
