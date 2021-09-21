@@ -18,6 +18,8 @@ int key_bindings(int keycode, t_mlx *mlx)
 int	close(t_mlx *mlx)
 {
 	mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_win);
+	free(mlx->mlx_ptr);
+	exit(0);
 }
 
 t_mlx square_init(t_mlx mlx)
@@ -69,7 +71,6 @@ int main(void)
 	mlx_hook(mlx.mlx_win, 2, 1L<<0, key_bindings, &mlx);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.mlx_win, mlx.img.img, 0, 0);
 	mlx_loop(mlx.mlx_ptr);
-	free(mlx.mlx_ptr);
 	return (0);
 }
 
