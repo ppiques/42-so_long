@@ -1,77 +1,49 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <mlx.h>
+#include "so_long.h"
 
 
-typedef struct		s_image
+int key_bindings(int keycode, t_mlx *mlx)
 {
-	void	*img;
-	int		*data;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}					t_image;
-
-typedef struct		s_mlx
-{
-    void		*mlx_ptr;
-    void		*mlx_win;
-	t_image		img;
-}					t_mlx;
-
-typedef struct		s_keys
-{
-	char		up;
-	char		down;
-	char		left;
-	char		right;
-	char		escape;
-}					t_keys;
-
-int	square_right(int keycode, t_mlx *mlx)
-{
-	int count_x;
-	int count_y;
-
-	count_y = -1;
-
-	printf("Moved square!\n");
-	while(++count_y < 600)
-	{
-		count_x = -1;
-		while (++count_x < 800)
-		{
-			if (count_x >= 350 && count_x <= 450 && count_y >= 250 && count_y <= 350)
-				mlx->img.data[count_y * 800 + count_x] = 0;
-			if (count_x >= 450 && count_x <= 550 && count_y >= 250 && count_y <= 350)
-				mlx->img.data[count_y * 800 + count_x] = 0x000000FF;
-		}
-	}
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.img, 0, 0);
+	if (keycode == XK_Right)
+		square_right(mlx);
+	if (keycode == XK_Left)
+		square_left(mlx);
+	if (keycode == XK_Up)
+		square_up(mlx);
+	if (keycode == XK_Down)
+		square_down(mlx);
+	if (keycode == XK_Escape)
+		close(mlx);
 }
 
-int	close(int keycode, t_mlx *mlx)
+int	close(t_mlx *mlx)
 {
 	mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_win);
-	return (0);
+}
+
+t_mlx square_init(t_mlx mlx)
+{
+	mlx.pos.middle = 1;
+	mlx.pos.up = 0;
+	mlx.pos.down = 0;
+	mlx.pos.right = 0;
+	mlx.pos.left = 0;
+	return (mlx);
 }
 
 int main(void)
 {
-	t_mlx mlx;
+	t_mlx	mlx;
 	int	count_x;
 	int	count_y;
-	int stop;
 
 	count_y = -1;
-	stop = 0;
 
 	mlx.mlx_ptr = mlx_init();
 	mlx.mlx_win = mlx_new_window(mlx.mlx_ptr, 800, 600, "Moving square");
 	mlx.img.img = mlx_new_image(mlx.mlx_ptr, 800, 600);
 	mlx.img.data = (int *)mlx_get_data_addr(mlx.img.img, &mlx.img.bits_per_pixel, &mlx.img.line_length, 
 											&mlx.img.endian);
+	mlx = square_init(mlx);
 	while (++count_y < 600) // 1  pixel sur 2 en blanc
 	{
 		count_x = -1;
@@ -84,7 +56,7 @@ int main(void)
 		}
 	}
 	count_y = -1;
-	while(++count_y < 600 && stop != 1) // carré au milieu
+	while(++count_y < 600) // carré au milieu
 	{
 		count_x = -1;
 		while (++count_x < 800)
@@ -93,13 +65,11 @@ int main(void)
 				mlx.img.data[count_y * 800 + count_x] = 0xFF0000;
 		}
 	}
-	stop = 1;
 
-
-
-	mlx_hook(mlx.mlx_win, 2, 1L<<0, square_right, &mlx);
+	mlx_hook(mlx.mlx_win, 2, 1L<<0, key_bindings, &mlx);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.mlx_win, mlx.img.img, 0, 0);
 	mlx_loop(mlx.mlx_ptr);
+	free(mlx.mlx_ptr);
 	return (0);
 }
 
