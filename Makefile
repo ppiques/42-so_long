@@ -6,13 +6,13 @@
 #    By: ppiques <ppiques@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/16 17:19:46 by ppiques           #+#    #+#              #
-#    Updated: 2021/09/21 15:35:17 by ppiques          ###   ########.fr        #
+#    Updated: 2021/09/23 15:43:38 by ppiques          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= so_long
 
-SRCS	= Hello_world.c movement.c
+SRCS	= Hello_world.c movement.c get_next_line.c get_next_line_utils.c
 
 OBJS 	= $(SRCS:.c=.o)
 

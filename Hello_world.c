@@ -1,7 +1,7 @@
 #include "so_long.h"
 
 
-int key_bindings(int keycode, t_mlx *mlx)
+int	key_bindings(int keycode, t_mlx *mlx)
 {
 	if (keycode == XK_Right)
 		square_right(mlx);
@@ -12,10 +12,11 @@ int key_bindings(int keycode, t_mlx *mlx)
 	if (keycode == XK_Down)
 		square_down(mlx);
 	if (keycode == XK_Escape)
-		close(mlx);
+		close_game(mlx);
+	return (0);
 }
 
-int	close(t_mlx *mlx)
+int	close_game(t_mlx *mlx)
 {
 	mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_win);
 	free(mlx->mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: ppiques <ppiques@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 15:31:59 by ppiques           #+#    #+#             */
-/*   Updated: 2021/09/21 17:30:01 by ppiques          ###   ########.fr       */
+/*   Updated: 2021/09/23 15:48:56 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	square_right(t_mlx *mlx)
 		mlx->pos.left = 0;
 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.img, 0, 0);
 	}
+	return (0);
 }
 
 int	square_left(t_mlx *mlx)
@@ -99,6 +100,7 @@ int	square_left(t_mlx *mlx)
 		mlx->pos.right = 0;
 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.img, 0, 0);
 	}
+	return (0);
 }
 
 int	square_up(t_mlx *mlx)
@@ -144,6 +146,7 @@ int	square_up(t_mlx *mlx)
 		mlx->pos.down = 0;
 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.img, 0, 0);
 	}
+	return (0);
 }
 
 int	square_down(t_mlx *mlx)
@@ -189,4 +192,5 @@ int	square_down(t_mlx *mlx)
 		mlx->pos.up = 0;
 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.img, 0, 0);
 	}
+	return (0);
 }
